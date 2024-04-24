@@ -17,8 +17,14 @@
           const obj = JSON.parse(Sfdc.canvas.decode(part));
           Sfdc.canvas.client.autogrow(obj.client); // iframeリサイズ
           console.log(obj);
-          const authBlock = document.getElementById('js-canvasArea');
-          authBlock.innerHTML = JSON.stringify(obj);
+          Sfdc.canvas.client.publish(obj.client, {
+            name: "mynamespace.Hello",
+            payload: {
+              status: 'Hello'
+            }
+          });
+          // const authBlock = document.getElementById('js-canvasArea');
+          // authBlock.innerHTML = JSON.stringify(obj);
           // const parseSignedRequest = Sfdc.canvas.decode(part);
           // const conn = new jsforce.Connection({ signedRequest: parseSignedRequest });
           
