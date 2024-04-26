@@ -14,8 +14,8 @@
           console.log(signedRequest);
           const part = signedRequest.split('.')[1];
           const obj = JSON.parse(Sfdc.canvas.decode(part));
-          // const authBlock = document.getElementById('js-canvasArea');
-          // authBlock.innerHTML = JSON.stringify(obj);
+          const authBlock = document.getElementById('js-canvasArea');
+          authBlock.innerHTML = JSON.stringify(obj);
           const parseSignedRequest = Sfdc.canvas.decode(part);
           const conn = new jsforce.Connection({ signedRequest: parseSignedRequest });
           
