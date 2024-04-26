@@ -17,8 +17,8 @@
           console.log(obj);
           Sfdc.canvas.client.subscribe(obj.client, {
             name: 'mynamespace.world',
-            onData: function (event) {
-              alert(event.status)
+            payload: {
+              status: 'Hello'
             }
           });
           // const authBlock = document.getElementById('js-canvasArea');
