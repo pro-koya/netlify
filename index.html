@@ -13,36 +13,28 @@
           console.log(signedRequest);
           const part = signedRequest.split('.')[1];
           const obj = JSON.parse(Sfdc.canvas.decode(part));
-          Sfdc.canvas.client.autogrow(obj.client); // iframeリサイズ
-          console.log(obj);
-          Sfdc.canvas.client.subscribe(obj.client, {
-            name: 'mynamespace.hello',
-            onData: function (event) {
-              alert(event.status)
-            }
-          });
           // const authBlock = document.getElementById('js-canvasArea');
           // authBlock.innerHTML = JSON.stringify(obj);
-          // const parseSignedRequest = Sfdc.canvas.decode(part);
-          // const conn = new jsforce.Connection({ signedRequest: parseSignedRequest });
+          const parseSignedRequest = Sfdc.canvas.decode(part);
+          const conn = new jsforce.Connection({ signedRequest: parseSignedRequest });
           
           // // 作成
-          // const insertBtn = document.getElementById('js-insertBtn');
-          // insertBtn.addEventListener('click', function () {
-          //   conn.sobject('Account').create({ Name : '株式会社 Salesforce Canvas' }, function(err, ret) {
-          //     if (err || !ret.success) { return console.error(err, ret); }
-          //     console.log("Created record id : " + ret.id);
-          //   });
-          // });
+          const insertBtn = document.getElementById('js-insertBtn');
+          insertBtn.addEventListener('click', function () {
+            conn.sobject('Account').create({ Name : '株式会社 Salesforce Canvas' }, function(err, ret) {
+              if (err || !ret.success) { return console.error(err, ret); }
+              console.log("Created record id : " + ret.id);
+            });
+          });
 
           // // 検索
-          // conn.query('SELECT Id, Name FROM Account LIMIT 1', function(err, res) {
-          //   if (err) {
-          //     console.error(err)
-          //   }
-          //   const canvasArea = document.getElementById('js-canvasArea');
-          //   canvasArea.innerHTML = JSON.stringify(res);
-          // });
+          conn.query('SELECT Id, Name FROM Account LIMIT 1', function(err, res) {
+            if (err) {
+              console.error(err)
+            }
+            const canvasArea = document.getElementById('js-canvasArea');
+            canvasArea.innerHTML = JSON.stringify(res);
+          });
         }
       });
     </script>
